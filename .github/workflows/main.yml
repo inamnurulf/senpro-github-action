@@ -2,7 +2,9 @@ name: Test, Build, and Deploy❘ Modul 81 Lab2.2 Senior Project
  
 on:
   push:
-    branches: [main]
+    branches: 
+      - main
+      - dev
  
 jobs:
   test-build:
@@ -42,7 +44,7 @@ jobs:
             eval "$(ssh-agent -s)"
             ssh-add ~/.ssh/vm_senpro_modul2_29
             echo "Cek folder project";
-            [ ! -d "${HOME}/senpro/479707/modul82/senpro-github-action/" ] &&
+            [ ! -d "${HOME}/senpro/479707/modul02/senpro-github-action/" ] &&
             {
               echo "Repository belum di-clone. Cloning...";
             mkdir -p ~/senpro/479707/modul02;
@@ -51,7 +53,7 @@ jobs:
             } ||
             {
               echo "Repository sudah ada. Building...";
-              cd ~/senpro/479707/modul82/senpro-github-action; 
+              cd ~/senpro/479707/modul02/senpro-github-action; 
               git restore .;
-              git pull origin main;
+              git pull origin ${{ github.ref }};
             }
